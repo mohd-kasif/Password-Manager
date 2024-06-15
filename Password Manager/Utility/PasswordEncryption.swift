@@ -8,10 +8,14 @@
 import Foundation
 import CryptoKit
 
+// Passwrod encrytion and decryption class
+/// we are using CryptoKit class for Apple
 class PasswordEncryption{
     static let shared=PasswordEncryption()
     private init(){}
     
+    
+    // encryting a password
     func encrypt(password:String)->String{
         let (password, key)=getData(password: password)
         //        var resultData:String=""
@@ -38,6 +42,8 @@ class PasswordEncryption{
     }
     
     
+    // decrypting password during eye toggle
+    /// currently facing some issue during decrytion
     func decrypt(pass:String)->String{
         print(pass, "encryted string in decrypt function")
         let key=SymmetricKey(size: .bits256)

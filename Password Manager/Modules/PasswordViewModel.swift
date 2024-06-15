@@ -28,6 +28,7 @@ class PasswordViewModel:ObservableObject{
         getAllData()
     }
     
+    // getting add data from container
     func getAllData(){
         let request=NSFetchRequest<PasswordContainer>(entityName: "PasswordContainer")
         do{
@@ -37,6 +38,8 @@ class PasswordViewModel:ObservableObject{
         }
     }
     
+    
+    //function to add data from view
     func addData(){
         let encryptedPassword=PasswordEncryption.shared.encrypt(password: password)
         print(accountName,email,encryptedPassword,"detail")
@@ -46,6 +49,9 @@ class PasswordViewModel:ObservableObject{
         manager.password=encryptedPassword
         saveData()
     }
+    
+    
+    // updating exiting data
     func updateData(entitly:PasswordContainer){
         entitly.account=accountName
         entitly.email=email
@@ -53,6 +59,7 @@ class PasswordViewModel:ObservableObject{
         saveData()
     }
     
+    // saving the user entered data
     func saveData(){
         do{
           try container.viewContext.save()
@@ -62,36 +69,38 @@ class PasswordViewModel:ObservableObject{
             print("erro saving data", error)
         }
     }
+    
+    // clear textfied after saving to in Core Data
     func clearData(){
         accountName=""
         email=""
         password=""
     }
     
+    // deleting a specific password, username
     func deleteData(item:PasswordContainer){
         container.viewContext.delete(item)
         saveData()
     }
     
+    
+    // function to toggle show password
     func showPassword(pass:String){
         print(pass, "encrypted password")
         if isVisible{
                 let result=PasswordEncryption.shared.decrypt(pass: pass)
                 print(result, "decryted string")
                 self.password=result
-          
-//                print("error in decryption", error)
-//            }
         }
     
      
     }
     
+    // here we are getting the existing data from container during updation phase
     func getDataFromDB(data:PasswordContainer){
         print(data.account ?? "","accound name")
         accountName=data.account ?? ""
         email=data.email ?? ""
         password=""
-//        saveData()
     }
 }
