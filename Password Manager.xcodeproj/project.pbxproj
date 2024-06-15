@@ -11,6 +11,14 @@
 		4B44DA102C1D5FBD008DFDAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA0F2C1D5FBD008DFDAD /* ContentView.swift */; };
 		4B44DA122C1D5FBF008DFDAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B44DA112C1D5FBF008DFDAD /* Assets.xcassets */; };
 		4B44DA152C1D5FBF008DFDAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B44DA142C1D5FBF008DFDAD /* Preview Assets.xcassets */; };
+		4B44DA1F2C1D601E008DFDAD /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA1E2C1D601E008DFDAD /* PasswordView.swift */; };
+		4B44DA212C1D60FD008DFDAD /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA202C1D60FD008DFDAD /* Extension.swift */; };
+		4B44DA242C1D635D008DFDAD /* SinglePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA232C1D635D008DFDAD /* SinglePasswordView.swift */; };
+		4B44DA262C1D6782008DFDAD /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA252C1D6782008DFDAD /* BottomSheet.swift */; };
+		4B44DA282C1D6974008DFDAD /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA272C1D6974008DFDAD /* ViewModifiers.swift */; };
+		4B44DA2A2C1D7449008DFDAD /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA292C1D7449008DFDAD /* PasswordViewModel.swift */; };
+		4B44DA2D2C1D7C46008DFDAD /* PasswordContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA2B2C1D7C46008DFDAD /* PasswordContainer.xcdatamodeld */; };
+		4B44DA2F2C1D862C008DFDAD /* PasswordEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B44DA2E2C1D862C008DFDAD /* PasswordEncryption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		4B44DA0F2C1D5FBD008DFDAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4B44DA112C1D5FBF008DFDAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B44DA142C1D5FBF008DFDAD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4B44DA1E2C1D601E008DFDAD /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		4B44DA202C1D60FD008DFDAD /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		4B44DA232C1D635D008DFDAD /* SinglePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePasswordView.swift; sourceTree = "<group>"; };
+		4B44DA252C1D6782008DFDAD /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		4B44DA272C1D6974008DFDAD /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		4B44DA292C1D7449008DFDAD /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		4B44DA2C2C1D7C46008DFDAD /* PasswordContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PasswordContainer.xcdatamodel; sourceTree = "<group>"; };
+		4B44DA2E2C1D862C008DFDAD /* PasswordEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEncryption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +67,14 @@
 		4B44DA0C2C1D5FBD008DFDAD /* Password Manager */ = {
 			isa = PBXGroup;
 			children = (
+				4B44DA222C1D630D008DFDAD /* Utility */,
+				4B44DA1B2C1D5FCB008DFDAD /* Modules */,
 				4B44DA0D2C1D5FBD008DFDAD /* Password_ManagerApp.swift */,
 				4B44DA0F2C1D5FBD008DFDAD /* ContentView.swift */,
 				4B44DA112C1D5FBF008DFDAD /* Assets.xcassets */,
 				4B44DA132C1D5FBF008DFDAD /* Preview Content */,
+				4B44DA202C1D60FD008DFDAD /* Extension.swift */,
+				4B44DA2B2C1D7C46008DFDAD /* PasswordContainer.xcdatamodeld */,
 			);
 			path = "Password Manager";
 			sourceTree = "<group>";
@@ -65,6 +85,26 @@
 				4B44DA142C1D5FBF008DFDAD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4B44DA1B2C1D5FCB008DFDAD /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4B44DA1E2C1D601E008DFDAD /* PasswordView.swift */,
+				4B44DA292C1D7449008DFDAD /* PasswordViewModel.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4B44DA222C1D630D008DFDAD /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				4B44DA232C1D635D008DFDAD /* SinglePasswordView.swift */,
+				4B44DA252C1D6782008DFDAD /* BottomSheet.swift */,
+				4B44DA272C1D6974008DFDAD /* ViewModifiers.swift */,
+				4B44DA2E2C1D862C008DFDAD /* PasswordEncryption.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +123,8 @@
 			dependencies = (
 			);
 			name = "Password Manager";
+			packageProductDependencies = (
+			);
 			productName = "Password Manager";
 			productReference = 4B44DA0A2C1D5FBD008DFDAD /* Password Manager.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +153,8 @@
 				Base,
 			);
 			mainGroup = 4B44DA012C1D5FBD008DFDAD;
+			packageReferences = (
+			);
 			productRefGroup = 4B44DA0B2C1D5FBD008DFDAD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +182,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B44DA102C1D5FBD008DFDAD /* ContentView.swift in Sources */,
+				4B44DA2A2C1D7449008DFDAD /* PasswordViewModel.swift in Sources */,
+				4B44DA282C1D6974008DFDAD /* ViewModifiers.swift in Sources */,
+				4B44DA1F2C1D601E008DFDAD /* PasswordView.swift in Sources */,
 				4B44DA0E2C1D5FBD008DFDAD /* Password_ManagerApp.swift in Sources */,
+				4B44DA2F2C1D862C008DFDAD /* PasswordEncryption.swift in Sources */,
+				4B44DA242C1D635D008DFDAD /* SinglePasswordView.swift in Sources */,
+				4B44DA262C1D6782008DFDAD /* BottomSheet.swift in Sources */,
+				4B44DA212C1D60FD008DFDAD /* Extension.swift in Sources */,
+				4B44DA2D2C1D7C46008DFDAD /* PasswordContainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +339,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Password-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -316,6 +371,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Password-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,6 +402,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4B44DA2B2C1D7C46008DFDAD /* PasswordContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4B44DA2C2C1D7C46008DFDAD /* PasswordContainer.xcdatamodel */,
+			);
+			currentVersion = 4B44DA2C2C1D7C46008DFDAD /* PasswordContainer.xcdatamodel */;
+			name = PasswordContainer.xcdatamodeld;
+			path = "/Users/kashif/Desktop/Udemy Course/Password Manager/Password Manager/PasswordContainer.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4B44DA022C1D5FBD008DFDAD /* Project object */;
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct Password_ManagerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PasswordView()
         }
     }
 }
