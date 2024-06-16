@@ -16,6 +16,11 @@ class PasswordViewModel:ObservableObject{
     @Published var email:String=""
     @Published var password:String=""
     @Published var isVisible:Bool=false
+    
+    @Published var isAccountEmpty:String?
+    @Published var isEmailEmpty:String?
+    @Published var isPasswordEmpty:String?
+    @Published var disabledTuple=(false, false ,false)
     init(){
         container=NSPersistentContainer(name: "PasswordContainer")
         container.loadPersistentStores { data, error  in
@@ -32,7 +37,7 @@ class PasswordViewModel:ObservableObject{
     func getAllData(){
         let request=NSFetchRequest<PasswordContainer>(entityName: "PasswordContainer")
         do{
-           passwordManager=try container.viewContext.fetch(request)
+            passwordManager=try container.viewContext.fetch(request)
         } catch let error{
             print("Error fetching data",error)
         }
@@ -48,6 +53,27 @@ class PasswordViewModel:ObservableObject{
         manager.email=email
         manager.password=encryptedPassword
         saveData()
+
+        
+    }
+    
+    func checkField()->Bool{
+        isAccountEmpty=nil
+        isEmailEmpty=nil
+        isPasswordEmpty=nil
+        if accountName.isEmpty{
+            isAccountEmpty="* This field cannot be empty"
+            return false
+        }
+        if email.isEmpty{
+            isEmailEmpty="* This field cannot be empty"
+            return false
+        }
+        if password.isEmpty{
+            isPasswordEmpty="* This field cannot be empty"
+            return false
+        }
+        return true
     }
     
     

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//f4f5fa
+
 struct PasswordView: View {
     @State var addItem=false
     @State var showDetail=false
@@ -14,9 +14,15 @@ struct PasswordView: View {
     @State var showPassword:String=""
     @State var showAccoutn:String=""
     @State var selectedItem:PasswordContainer?
-    @State var isVisible:Bool=false
     @State var isEdit:Bool=false
     @ObservedObject var vm=PasswordViewModel()
+    
+    
+    func errorMessage(message:String)->some View{
+        Text(message)
+            .foregroundColor(.red)
+            .font(.system(size: 8))
+    }
     var body: some View {
         ZStack{
             Color.color("#F4F5FA").ignoresSafeArea()
@@ -32,13 +38,11 @@ struct PasswordView: View {
                         SinglePasswordView(title: item.account ?? "")
                             .padding(.top)
                             .onTapGesture {
-                                DispatchQueue.main.async {
-                                    self.selectedItem=item
-                                    self.showEmail=item.email ?? ""
-                                    self.showPassword=item.password ?? ""
-                                    self.showAccoutn=item.account ?? ""
-                                }
-                            
+                                self.selectedItem=item
+                                self.showEmail=item.email ?? ""
+                                self.showPassword=item.password ?? ""
+                                self.showAccoutn=item.account ?? ""
+                                
                                 self.showDetail.toggle()
                             }
                     }
@@ -53,15 +57,28 @@ struct PasswordView: View {
                 }
                 .passwordBottomSheet(isPresented: $addItem){
                     AddPasswordSheet(title: "Account Name", text: $vm.accountName)
+                    if let error=vm.isAccountEmpty{
+                        errorMessage(message: error)
+                    }
                     AddPasswordSheet(title: "Username/Email", text: $vm.email)
                         .padding(.top)
+                    if let error=vm.isEmailEmpty{
+                        errorMessage(message: error)
+                    }
                     AddPasswordSheet(title: "Password", text: $vm.password)
                         .padding(.top)
-                    MyButton(title: "Add New Account"){
-                        vm.addData()
-                        addItem=false
+                    if let error=vm.isPasswordEmpty{
+                        errorMessage(message: error)
                     }
-                  
+                    MyButton(title: "Add New Account"){
+                        let check=vm.checkField()
+                        if check{
+                            vm.addData()
+                            addItem=false
+                        }
+                        
+                    }
+                    
                 }
                 .passwordBottomSheet(isPresented: $isEdit){
                     AddPasswordSheet(title: "Account Name", text: $vm.accountName)
@@ -74,39 +91,13 @@ struct PasswordView: View {
                         if let item=selectedItem{
                             vm.updateData(entitly: item)
                         }
-                       
+                        
                     }
-                  
+                    
                 }
                 .passwordBottomSheet(isPresented: $showDetail){
                     VStack(alignment: .leading){
-                        VStack{
-                            Text("Account Details")
-                                .foregroundColor(Color.color("#3F7DE3"))
-                                .fontWeight(.bold)
-                                .font(.system(size: 20))
-                        }
-                       
-                        VStack(alignment:.leading){
-                            Text("Account Type")
-                                .foregroundColor(Color.color("#CCCCCC"))
-                                .font(.system(size: 11))
-                            Text(showAccoutn)
-                                .foregroundColor(Color.color("#333333"))
-                                .font(.system(size: 20))
-                                .fontWeight(.bold)
-                        }
-                        .padding(.top)
-                        VStack(alignment:.leading){
-                            Text("Username/Email")
-                                .foregroundColor(Color.color("#CCCCCC"))
-                                .font(.system(size: 11))
-                            Text(showEmail)
-                                .foregroundColor(Color.color("#333333"))
-                                .font(.system(size: 20))
-                                .fontWeight(.bold)
-                        }
-                        .padding(.top)
+                        ShowDetailView(item: selectedItem)
                         VStack(alignment:.leading){
                             HStack{
                                 Text("Password")
@@ -145,23 +136,59 @@ struct PasswordView: View {
                                 vm.deleteData(item: item)
                                 self.showDetail.toggle()
                             }
-                        
+                            
                         }
                     }
                     .padding(.bottom)
                 }
-             
+                
             } .padding([.leading,.trailing],20)
-         
-    
+            
+            
         }
-
+        
     }
 }
 
 //#Preview {
 //    PasswordView(index:0)
 //}
+
+struct ShowDetailView:View {
+    var item:PasswordContainer?
+    var body: some View {
+        if let item=item{
+            VStack{
+                Text("Account Details")
+                    .foregroundColor(Color.color("#3F7DE3"))
+                    .fontWeight(.bold)
+                    .font(.system(size: 20))
+            }
+            
+            VStack(alignment:.leading){
+                Text("Account Type")
+                    .foregroundColor(Color.color("#CCCCCC"))
+                    .font(.system(size: 11))
+                Text(item.account ?? "")
+                    .foregroundColor(Color.color("#333333"))
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+            }
+            .padding(.top)
+            VStack(alignment:.leading){
+                Text("Username/Email")
+                    .foregroundColor(Color.color("#CCCCCC"))
+                    .font(.system(size: 11))
+                Text(item.email ?? "")
+                    .foregroundColor(Color.color("#333333"))
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+            }
+            .padding(.top)
+        }
+        
+    }
+}
 
 struct AddPasswordSheet:View{
     var title:String
@@ -170,14 +197,14 @@ struct AddPasswordSheet:View{
     var body: some View{
         HStack{
             TextField(title, text: $text)
-//                .onChange(of: text){val in
-//                    text=val.uppercased()
-//                    
-//                    if text.count>2{
-//                        print(text,"search character")
-//                        vm.searchInfo(text: text)
-//                    }
-//                }
+            //                .onChange(of: text){val in
+            //                    text=val.uppercased()
+            //
+            //                    if text.count>2{
+            //                        print(text,"search character")
+            //                        vm.searchInfo(text: text)
+            //                    }
+            //                }
                 .padding()
         }
         .textFieldStyle()
@@ -223,7 +250,7 @@ struct DetailSheet:View {
                     .fontWeight(.bold)
                     .font(.system(size: 20))
             }
-           
+            
             VStack(alignment:.leading){
                 Text("Account Type")
                     .foregroundColor(Color.color("#CCCCCC"))
