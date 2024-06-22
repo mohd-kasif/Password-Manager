@@ -81,7 +81,8 @@ class PasswordViewModel:ObservableObject{
     func updateData(entitly:PasswordContainer){
         entitly.account=accountName
         entitly.email=email
-        entitly.password=password
+        let encrytedPassword=PasswordEncryption.shared.encrypt(password: password)
+        entitly.password=encrytedPassword
         saveData()
     }
     

@@ -13,7 +13,7 @@ import CryptoKit
 class PasswordEncryption{
     static let shared=PasswordEncryption()
     private init(){}
-    
+    let key=SymmetricKey(size: .bits256)
     
     // encryting a password
     func encrypt(password:String)->String{
@@ -21,18 +21,16 @@ class PasswordEncryption{
         //        var resultData:String=""
         do{
             let result=try encruptData(data: password, key: key)
-            print(result,"encryped string")
             return result
             //            return result
         } catch let error{
-            print("error in encryptin",error)
+            print(error)
         }
         return ""
     }
     
     func getData(password:String)->(Data, SymmetricKey){
         let input=Data(password.utf8)
-        let key=SymmetricKey(size: .bits256)
         return (input, key)
     }
     
@@ -43,12 +41,8 @@ class PasswordEncryption{
     
     
     // decrypting password during eye toggle
-    /// currently facing some issue during decrytion
     func decrypt(pass:String)->String{
-        print(pass, "encryted string in decrypt function")
-        let key=SymmetricKey(size: .bits256)
-        guard let data=Data(base64Encoded:pass) else {print("errro converting to data");return ""}
-        print(data, "data in bytes")
+        guard let data=Data(base64Encoded:pass) else {return ""}
         do{
             let sealedBox=try AES.GCM.SealedBox(combined: data)
             let ss=try AES.GCM.open(sealedBox, using: key)
@@ -58,7 +52,6 @@ class PasswordEncryption{
                 print("caanot convert to string decoeding")
             }
         } catch let error{
-            print(error, "")
             return "Request Not Fulfilled"
         }
         return ""
